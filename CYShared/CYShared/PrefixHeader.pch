@@ -1,0 +1,12 @@
+//
+//  PrefixHeader.pch
+//  CYShared
+//
+//  Created by Chenyun on 14/11/19.
+//  Copyright (c) 2014年 geek-zoo. All rights reserved.
+//
+
+#ifndef CYShared_PrefixHeader_pch
+#define CYShared_PrefixHeader_pch
+
+#endif
