@@ -67,4 +67,16 @@
 }
 
 
+- (Shared_Post *)tPost
+{
+	Shared_Post * post = [[Shared_Post alloc] init];
+	post.title = @"title";
+	post.text  = @"text";
+	post.photo = [UIImage imageNamed:@"1.png"];
+	post.thum  = [UIImage imageNamed:@"Icon.png"];
+	post.url  = @"www.baidu.com";
+
+	return post;
+}
+
 </pre>
