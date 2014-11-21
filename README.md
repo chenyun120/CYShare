@@ -6,7 +6,6 @@
 // 导入后加入通知
 －(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-	// 加入下面通知
 	if ( url || sourceApplication )
 	{
 		NSDictionary * params = @{@"url" : url,
@@ -19,7 +18,6 @@
 
 
 // 新浪微博分享
-－ (IBAction)sharedSinAction:(id)sender
 {
 	[SinganWeibo sharedInstance].post = [self tPost];
 
