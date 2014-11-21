@@ -25,13 +25,16 @@ DEF_SINGLETON( WXChatShared );
 - (void)wxChatInit
 {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceApplication:) name:@"sourceApplication" object:nil];
-	
+
 	self.whenShareBegin = [ServiceShare sharedInstance].whenShareBegin;
 	self.whenShareFailed = [ServiceShare sharedInstance].whenShareFailed;
 	self.whenShareSucceed = [ServiceShare sharedInstance].whenShareSucceed;
 	self.whenShareCancelled = [ServiceShare sharedInstance].whenShareCancelled;
-	
-	[WXApi registerApp:KAppId];
+}
+
+- (void)powerOn
+{
+	[WXApi registerApp:self.appId];
 }
 
 - (void)sourceApplication:(NSNotification *)notifi

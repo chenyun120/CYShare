@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "SinaWeibo.h"
+#import "WXChatShared.h"
+#import "TencentOpenShared.h"
 
 @interface AppDelegate ()
 
@@ -15,8 +18,30 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	// Override point for customization after application launch.
+
+	// 分享配置
+	[self setShared];
+
 	return YES;
+}
+
+- (void)setShared
+{
+	ALIAS( [SinaWeibo sharedInstance], singan );
+	ALIAS( [WXChatShared sharedInstance], wxchat );
+	ALIAS( [TencentOpenShared sharedInstance], tencent );
+
+	// 新浪微博分享
+	singan.appKey = @"2716041576";
+	[singan powerOn];
+
+	// 微信分享
+	wxchat.appId = @"wx67389d6a38a4bf60";
+	[wxchat powerOn];
+
+	// QQ分享
+	tencent.appId = @"101027797";
+	[tencent powerOn];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation

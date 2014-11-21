@@ -9,22 +9,20 @@
 #define KAppKey @"2716041576"
 #define KRedirectURI @"https://api.weibo.com/oauth2/default.html"
 
-#import "SinganWeibo.h"
+#import "SinaWeibo.h"
 
-@implementation SinganWeibo
-DEF_SINGLETON(singanWeibo)
+@implementation SinaWeibo
+DEF_SINGLETON(SinaWeibo)
 
 #pragma mark -
 
 + (void)load
 {
-	[[SinganWeibo sharedInstance] singanWeiboInit];
+	[[SinaWeibo sharedInstance] singanWeiboInit];
 }
 
 - (void)singanWeiboInit
 {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishLaunchingWithOptions:) name:UIApplicationDidFinishLaunchingNotification object:nil];
-	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceApplication:) name:@"sourceApplication" object:nil];
 	
 	self.whenShareBegin = [ServiceShare sharedInstance].whenShareBegin;
@@ -33,10 +31,10 @@ DEF_SINGLETON(singanWeibo)
 	self.whenShareCancelled = [ServiceShare sharedInstance].whenShareCancelled;
 }
 
-- (void)didFinishLaunchingWithOptions:(NSNotification *)notifi
+- (void)powerOn
 {
 	[WeiboSDK enableDebugMode:YES];
-	[WeiboSDK registerApp:KAppKey];
+	[WeiboSDK registerApp:self.appKey];
 }
 
 - (void)sourceApplication:(NSNotification *)notifi

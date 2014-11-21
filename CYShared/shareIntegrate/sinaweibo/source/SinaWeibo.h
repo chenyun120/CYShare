@@ -10,11 +10,7 @@
 #import "ServiceShare.h"
 #import "WeiboSDK.h"
 
-@interface SinganWeibo : ServiceShare <WeiboSDKDelegate>
-AS_SINGLETON(singanWeibo);
-
-@property (nonatomic, readonly) BOOL							isAuthorized;
-
+@interface SinaWeibo : ServiceShare <WeiboSDKDelegate>
+AS_SINGLETON(SinaWeibo);
 - (void)sharedSin;
-
 @end

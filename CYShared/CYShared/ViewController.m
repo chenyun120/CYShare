@@ -7,9 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "SinganWeibo.h"
-#import "TencentOpenShared.h"
+#import "SinaWeibo.h"
 #import "WXChatShared.h"
+#import "TencentOpenShared.h"
 
 @interface ViewController ()
 
@@ -25,103 +25,87 @@
 // 新浪微博分享
 - (IBAction)sharedSinAction:(id)sender
 {
-	[SinganWeibo sharedInstance].post = [self tPost];
+	ALIAS( [SinaWeibo sharedInstance], singan );
+	
+	singan.post = [self tPost];
 
-	[SinganWeibo sharedInstance].whenShareBegin = ^{
-		NSLog(@"开始分享");
-	};
-
-	[SinganWeibo sharedInstance].whenShareSucceed = ^{
+	singan.whenShareSucceed = ^{
 		// 分享成功
 		NSLog(@"分享成功");
 	};
 
-	[SinganWeibo sharedInstance].whenShareFailed = ^{
+	singan.whenShareFailed = ^{
 		// 分享失败
 		NSLog(@"分享失败");
 	};
 
-	[[SinganWeibo sharedInstance] sharedSin];
+	[singan sharedSin];
 }
 
 // QQ好友分享
 - (IBAction)qqFriendsShared:(id)sender
 {
-	[TencentOpenShared sharedInstance].post = [self tPost];
+	ALIAS( [TencentOpenShared sharedInstance], tencent );
+
+	tencent.post = [self tPost];
 	
-	[TencentOpenShared sharedInstance].whenShareBegin =^{
-		// 开始分享
-		NSLog(@"开始分享");
-	};
-	
-	[TencentOpenShared sharedInstance].whenShareSucceed = ^{
+	tencent.whenShareSucceed = ^{
 		// 分享成功
 		NSLog(@"分享成功");
 	};
 	
-	[TencentOpenShared sharedInstance].whenShareFailed = ^{
+	tencent.whenShareFailed = ^{
 		// 分享失败
 		NSLog(@"分享失败");
 	};
 
-	[[TencentOpenShared sharedInstance] shareQq];
+	[tencent shareQq];
 }
 
 // QQ空间分享
 - (IBAction)qqSpaceShared:(id)sender
 {
-	[TencentOpenShared sharedInstance].post = [self tPost];
+	ALIAS( [TencentOpenShared sharedInstance], tencent );
 
-	[TencentOpenShared sharedInstance].whenShareBegin =^{
-		// 开始分享
-		NSLog(@"开始分享");
-	};
+	tencent.post = [self tPost];
 
-	[TencentOpenShared sharedInstance].whenShareSucceed = ^{
+	tencent.whenShareSucceed = ^{
 		// 分享成功
 		NSLog(@"分享成功");
 	};
 
-	[TencentOpenShared sharedInstance].whenShareFailed = ^{
+	tencent.whenShareFailed = ^{
 		// 分享失败
 		NSLog(@"分享失败");
 	};
 
-	[[TencentOpenShared sharedInstance] shareQzone];
+	[tencent shareQzone];
 }
 
 // 微信好友分享
 - (IBAction)weixinFriendsShared:(id)sender
 {
-	[WXChatShared sharedInstance].post = [self tPost];
-	
-	[WXChatShared sharedInstance].whenShareBegin =^{
-		// 开始分享
-		NSLog(@"开始分享");
-	};
-	
-	[WXChatShared sharedInstance].whenShareSucceed = ^{
+	ALIAS( [WXChatShared sharedInstance], wxchat );
+
+	wxchat.post = [self tPost];
+
+	wxchat.whenShareSucceed = ^{
 		// 分享成功
 		NSLog(@"分享成功");
 	};
 	
-	[WXChatShared sharedInstance].whenShareFailed = ^{
+	wxchat.whenShareFailed = ^{
 		// 分享失败
 		NSLog(@"分享失败");
 	};
 	
-	[[WXChatShared sharedInstance] shareFriend];
+	[wxchat shareFriend];
 }
 
 // 微信朋友圈分享
 - (IBAction)weixinRingShared:(id)sender
 {
 	[WXChatShared sharedInstance].post = [self tPost];
-
-	[WXChatShared sharedInstance].whenShareBegin =^{
-		// 开始分享
-		NSLog(@"开始分享");
-	};
 
 	[WXChatShared sharedInstance].whenShareSucceed = ^{
 		// 分享成功
@@ -136,47 +120,16 @@
 	[[WXChatShared sharedInstance] shareTimeline];
 }
 
-- (Service_Post *)tPost
+- (Shared_Post *)tPost
 {
-	Service_Post * post = [[Service_Post alloc] init];
+	Shared_Post * post = [[Shared_Post alloc] init];
 	post.title = @"title";
 	post.text  = @"text";
 	post.photo = [UIImage imageNamed:@"1.png"];
 	post.thum  = [UIImage imageNamed:@"Icon.png"];
 	post.url  = @"www.baidu.com";
+
 	return post;
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
