@@ -1,10 +1,6 @@
-/*
-
-// AppKey和url等设置在.m文件中  例如新浪微博：SinganWeibo.m中：
-
-// #define KAppKey @"2716041576"
-
-// #define KRedirectURI @"https://api.weibo.com/oauth2/default.html"
+ AppKey和url等设置在.m文件中  例如新浪微博：SinganWeibo.m中：
+ #define KAppKey @"2716041576"
+ #define KRedirectURI @"https://api.weibo.com/oauth2/default.html"
 
 
 // 导入后加入通知
@@ -44,8 +40,3 @@
 //
 //	[[SinganWeibo sharedInstance] sharedSin];
 //}
-
-
-
-
-*/
