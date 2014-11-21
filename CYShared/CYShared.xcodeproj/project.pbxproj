@@ -23,7 +23,6 @@
 		326A0DDC1A1F24400040F3D2 /* WXChatShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 326A0DCD1A1F24400040F3D2 /* WXChatShared.m */; };
 		326A0DDD1A1F24400040F3D2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 326A0DD01A1F24400040F3D2 /* libWeChatSDK.a */; };
 		326A0DDE1A1F24400040F3D2 /* libWeChatSDK_armv7_armv7s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 326A0DD11A1F24400040F3D2 /* libWeChatSDK_armv7_armv7s.a */; };
-		32E3993F1A1D92C4007C4425 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 32E3993E1A1D92C4007C4425 /* Icon.png */; };
 		32F8DB851A1C920100D8DE00 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F8DB841A1C920100D8DE00 /* main.m */; };
 		32F8DB881A1C920100D8DE00 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F8DB871A1C920100D8DE00 /* AppDelegate.m */; };
 		32F8DB8B1A1C920100D8DE00 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F8DB8A1A1C920100D8DE00 /* ViewController.m */; };
@@ -70,7 +69,6 @@
 		326A0DD11A1F24400040F3D2 /* libWeChatSDK_armv7_armv7s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK_armv7_armv7s.a; sourceTree = "<group>"; };
 		326A0DD21A1F24400040F3D2 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		326A0DD31A1F24400040F3D2 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		32E3993E1A1D92C4007C4425 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		32F8DB7F1A1C920100D8DE00 /* CYShared.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CYShared.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32F8DB831A1C920100D8DE00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32F8DB841A1C920100D8DE00 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -280,7 +278,6 @@
 				326A0D241A1E044D0040F3D2 /* CoreGraphics.framework */,
 				326A0D221A1E043D0040F3D2 /* CoreTelephony.framework */,
 				326A0D201A1E03F60040F3D2 /* libsqlite3.dylib */,
-				32E3993E1A1D92C4007C4425 /* Icon.png */,
 				32F8DB831A1C920100D8DE00 /* Info.plist */,
 				32F8DB841A1C920100D8DE00 /* main.m */,
 				32F8DBBA1A1C9D9D00D8DE00 /* PrefixHeader.pch */,
@@ -389,7 +386,6 @@
 				32F8DB8E1A1C920100D8DE00 /* Main.storyboard in Resources */,
 				32F8DB931A1C920100D8DE00 /* LaunchScreen.xib in Resources */,
 				326A0DD81A1F24400040F3D2 /* WeiboSDK.bundle in Resources */,
-				32E3993F1A1D92C4007C4425 /* Icon.png in Resources */,
 				32F8DB901A1C920100D8DE00 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
