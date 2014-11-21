@@ -1,10 +1,10 @@
-# ARC
+<pre>
  AppKey和url等设置在.m文件中  例如新浪微博：SinganWeibo.m中
  #define KAppKey @"2716041576"
  #define KRedirectURI @"https://api.weibo.com/oauth2/default.html"
 
 
-## --
+
 // 导入后加入通知
 －(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
@@ -39,3 +39,4 @@
 
 	[[SinganWeibo sharedInstance] sharedSin];
 }
+</pre>
