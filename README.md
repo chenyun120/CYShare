@@ -20,23 +20,23 @@
 
 
 // 新浪微博分享
-// - (IBAction)sharedSinAction:(id)sender
-//{
-//	[SinganWeibo sharedInstance].post = [self tPost];
-//
-//	[SinganWeibo sharedInstance].whenShareBegin = ^{
-//		NSLog(@"开始分享");
-//	};
+- (IBAction)sharedSinAction:(id)sender
+{
+	[SinganWeibo sharedInstance].post = [self tPost];
 
-//	[SinganWeibo sharedInstance].whenShareSucceed = ^{
-//		// 分享成功
-//		NSLog(@"分享成功");
-//	};
-//
-//	[SinganWeibo sharedInstance].whenShareFailed = ^{
-//		// 分享失败
-//		NSLog(@"分享失败");
-//	};
-//
-//	[[SinganWeibo sharedInstance] sharedSin];
-//}
+	[SinganWeibo sharedInstance].whenShareBegin = ^{
+		NSLog(@"开始分享");
+	};
+
+	[SinganWeibo sharedInstance].whenShareSucceed = ^{
+		// 分享成功
+		NSLog(@"分享成功");
+	};
+
+	[SinganWeibo sharedInstance].whenShareFailed = ^{
+		// 分享失败
+		NSLog(@"分享失败");
+	};
+
+	[[SinganWeibo sharedInstance] sharedSin];
+}
