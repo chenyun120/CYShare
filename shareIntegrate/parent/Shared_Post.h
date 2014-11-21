@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Service_Post : NSObject
+@interface Shared_Post : NSObject
 @property (nonatomic, strong) NSString * title;
 @property (nonatomic, strong) NSString * text;
 @property (nonatomic, strong) id		 photo;
 @property (nonatomic, strong) id		 thum;
 @property (nonatomic, strong) NSString * url;
 
-- (void)copyFrom:(Service_Post *)post;
+- (void)copyFrom:(Shared_Post *)post;
 - (void)clear;
 
 @end

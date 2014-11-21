@@ -24,14 +24,16 @@ DEF_SINGLETON( TencentOpenShared );
 - (void)TencentOpenInit
 {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceApplication:) name:@"sourceApplication" object:nil];
-	
-	self.tencentOAuth = [[TencentOAuth alloc] initWithAppId:KAppId andDelegate:self];
-//	self.tencentOAuth.redirectURI = @"";
 
 	self.whenShareBegin = [ServiceShare sharedInstance].whenShareBegin;
 	self.whenShareFailed = [ServiceShare sharedInstance].whenShareFailed;
 	self.whenShareSucceed = [ServiceShare sharedInstance].whenShareSucceed;
 	self.whenShareCancelled = [ServiceShare sharedInstance].whenShareCancelled;
+}
+
+- (void)powerOn
+{
+	self.tencentOAuth = [[TencentOAuth alloc] initWithAppId:self.appId andDelegate:self];
 }
 
 - (void)sourceApplication:(NSNotification *)notifi

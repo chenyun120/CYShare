@@ -1,8 +1,8 @@
 //
-//  CYPrecompile.h
-//  UrlPush
+//  sharedModel.h
+//  CYShared
 //
-//  Created by Chenyun on 14/11/19.
+//  Created by Chenyun on 14/11/21.
 //  Copyright (c) 2014年 geek-zoo. All rights reserved.
 //
 
@@ -25,5 +25,6 @@ dispatch_once( &once, ^{ __singleton__ = [[self alloc] init]; } ); \
 return __singleton__; \
 }
 
-#undef  PERFORM_BLOCK_SAFELY
-#define PERFORM_BLOCK_SAFELY( b, ... ) if ( (b) ) { (b)(__VA_ARGS__); }
+#undef	ALIAS
+#define	ALIAS( __a, __b ) \
+__typeof__(__a) __b = __a;

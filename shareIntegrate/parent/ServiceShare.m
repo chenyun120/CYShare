@@ -19,4 +19,9 @@ DEF_SINGLETON( ServiceShare );
 	self.whenShareCancelled	= nil;
 }
 
+- (void)powerOn
+{
+	
+}
+
 @end

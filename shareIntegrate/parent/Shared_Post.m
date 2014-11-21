@@ -6,11 +6,11 @@
 //  Copyright (c) 2014年 geek-zoo. All rights reserved.
 //
 
-#import "Service_Post.h"
+#import "Shared_Post.h"
 
-@implementation Service_Post
+@implementation Shared_Post
 
-- (void)copyFrom:(Service_Post *)post
+- (void)copyFrom:(Shared_Post *)post
 {
 	if ( post.title )
 	{
