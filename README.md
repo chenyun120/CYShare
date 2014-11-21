@@ -8,13 +8,14 @@
 
 
 // 导入后加入通知
-// - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+－(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+	// 加入下面通知
 	if ( url || sourceApplication )
 	{
 		NSDictionary * params = @{@"url" : url,
-					  @"source" : sourceApplication
-					 };
+								  @"source" : sourceApplication
+								 };
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"sourceApplication" object:nil userInfo:params];
 	}
 
