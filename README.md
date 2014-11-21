@@ -3,7 +3,7 @@
  #define KRedirectURI @"https://api.weibo.com/oauth2/default.html"
 
 
- 导入后加入通知
+// 导入后加入通知
 －(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
 	// 加入下面通知
@@ -14,13 +14,12 @@
 								 };
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"sourceApplication" object:nil userInfo:params];
 	}
-
 	return YES;
 }
 
 
 // 新浪微博分享
-- (IBAction)sharedSinAction:(id)sender
+－ (IBAction)sharedSinAction:(id)sender
 {
 	[SinganWeibo sharedInstance].post = [self tPost];
 
