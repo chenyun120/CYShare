@@ -9,26 +9,26 @@
 #define KAppKey @"cf6c9a2d437ec76fa20669293a5c640a"
 #define KAppId @"101027797"
 
-#import "TencentOpenShared.h"
+#import "CYTencentOpenShared.h"
 
-@implementation TencentOpenShared
+@implementation CYTencentOpenShared
 DEF_SINGLETON( TencentOpenShared );
 
 #pragma mark -
 
 + (void)load
 {
-	[[TencentOpenShared sharedInstance] TencentOpenInit];
+	[[CYTencentOpenShared sharedInstance] TencentOpenInit];
 }
 
 - (void)TencentOpenInit
 {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceApplication:) name:@"sourceApplication" object:nil];
 
-	self.whenShareBegin = [ServiceShare sharedInstance].whenShareBegin;
-	self.whenShareFailed = [ServiceShare sharedInstance].whenShareFailed;
-	self.whenShareSucceed = [ServiceShare sharedInstance].whenShareSucceed;
-	self.whenShareCancelled = [ServiceShare sharedInstance].whenShareCancelled;
+	self.whenShareBegin = [CYServiceShare sharedInstance].whenShareBegin;
+	self.whenShareFailed = [CYServiceShare sharedInstance].whenShareFailed;
+	self.whenShareSucceed = [CYServiceShare sharedInstance].whenShareSucceed;
+	self.whenShareCancelled = [CYServiceShare sharedInstance].whenShareCancelled;
 }
 
 - (void)powerOn
@@ -76,9 +76,9 @@ DEF_SINGLETON( TencentOpenShared );
 		{
 			imageData = UIImageJPEGRepresentation(self.post.photo, 0.6);
 		}
-		
+
 		NSString * title = self.post.title;
-		
+
 		if ( title.length > 140 )
 		{
 			title = [title substringToIndex:140];
@@ -90,9 +90,9 @@ DEF_SINGLETON( TencentOpenShared );
 		{
 			text = [text substringToIndex:140];
 		}
-		
+
 		QQApiNewsObject *newsObj ;
-		
+
 		if ( [self.post.photo isKindOfClass:[NSString class]] )
 		{
 			newsObj = [QQApiNewsObject objectWithURL:[NSURL URLWithString:self.post.url ? : @""]
@@ -107,11 +107,11 @@ DEF_SINGLETON( TencentOpenShared );
 										 description:text ? : @"分享"
 									previewImageData:imageData];
 		}
-		
+
 		SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:newsObj];
-		
+
 		QQApiSendResultCode sent = 0;
-		
+
 		if ( TencentOpenSenceQZone == scene )
 		{
 			//分享到QZone
@@ -190,9 +190,9 @@ DEF_SINGLETON( TencentOpenShared );
 	{
 		self.whenShareBegin();
 	}
-	else if ( [ServiceShare sharedInstance].whenShareBegin )
+	else if ( [CYServiceShare sharedInstance].whenShareBegin )
 	{
-		[ServiceShare sharedInstance].whenShareBegin();
+		[CYServiceShare sharedInstance].whenShareBegin();
 	}
 }
 
@@ -202,9 +202,9 @@ DEF_SINGLETON( TencentOpenShared );
 	{
 		self.whenShareSucceed();
 	}
-	else if ( [ServiceShare sharedInstance].whenShareSucceed )
+	else if ( [CYServiceShare sharedInstance].whenShareSucceed )
 	{
-		[ServiceShare sharedInstance].whenShareSucceed();
+		[CYServiceShare sharedInstance].whenShareSucceed();
 	}
 
 	[self clearPost];
@@ -216,9 +216,9 @@ DEF_SINGLETON( TencentOpenShared );
 	{
 		self.whenShareFailed();
 	}
-	else if ( [ServiceShare sharedInstance].whenShareFailed )
+	else if ( [CYServiceShare sharedInstance].whenShareFailed )
 	{
-		[ServiceShare sharedInstance].whenShareFailed();
+		[CYServiceShare sharedInstance].whenShareFailed();
 	}
 	
 	[self clearPost];

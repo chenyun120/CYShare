@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 geek-zoo. All rights reserved.
 //
 
-#import "ServiceShare.h"
+#import "CYServiceShare.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/TencentOAuthObject.h>
 #import <TencentOpenAPI/TencentMessageObject.h>
@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, TencentOpenSence) {
 	TencentOpenSenceQZone
 };
 
-@interface TencentOpenShared : ServiceShare <TencentSessionDelegate, QQApiInterfaceDelegate>
+@interface CYTencentOpenShared : CYServiceShare <TencentSessionDelegate, QQApiInterfaceDelegate>
 
 AS_SINGLETON( TencentOpenShared );
 

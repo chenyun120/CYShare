@@ -62,6 +62,15 @@
                                     <action selector="weixinRingShared:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kaM-gm-9hp"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="La8-VZ-jpc">
+                                <rect key="frame" x="101" y="355" width="119" height="30"/>
+                                <state key="normal" title="关注">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="followSinAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cvt-vm-0mf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

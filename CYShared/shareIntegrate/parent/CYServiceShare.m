@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 geek-zoo. All rights reserved.
 //
 
-#import "ServiceShare.h"
+#import "CYServiceShare.h"
 
-@implementation ServiceShare
+@implementation CYServiceShare
 DEF_SINGLETON( ServiceShare );
 
 - (void)dealloc
@@ -17,6 +17,11 @@ DEF_SINGLETON( ServiceShare );
 	self.whenShareSucceed	= nil;
 	self.whenShareFailed	= nil;
 	self.whenShareCancelled	= nil;
+	
+	self.whenFollowBegin	 = nil;
+	self.whenFollowSucceed	 = nil;
+	self.whenFollowFailed	 = nil;
+	self.whenFollowCancelled = nil;
 }
 
 - (void)powerOn

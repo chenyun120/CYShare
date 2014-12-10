@@ -9,9 +9,9 @@
 #define KAppKey @"243839795ab071506527afee1c32c9c2"
 #define KAppId @"wx67389d6a38a4bf60"
 
-#import "WXChatShared.h"
+#import "CYWXChatShared.h"
 
-@implementation WXChatShared
+@implementation CYWXChatShared
 
 DEF_SINGLETON( WXChatShared );
 
@@ -19,17 +19,17 @@ DEF_SINGLETON( WXChatShared );
 
 + (void)load
 {
-	[[WXChatShared sharedInstance] wxChatInit];
+	[[CYWXChatShared sharedInstance] wxChatInit];
 }
 
 - (void)wxChatInit
 {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceApplication:) name:@"sourceApplication" object:nil];
 
-	self.whenShareBegin = [ServiceShare sharedInstance].whenShareBegin;
-	self.whenShareFailed = [ServiceShare sharedInstance].whenShareFailed;
-	self.whenShareSucceed = [ServiceShare sharedInstance].whenShareSucceed;
-	self.whenShareCancelled = [ServiceShare sharedInstance].whenShareCancelled;
+	self.whenShareBegin = [CYServiceShare sharedInstance].whenShareBegin;
+	self.whenShareFailed = [CYServiceShare sharedInstance].whenShareFailed;
+	self.whenShareSucceed = [CYServiceShare sharedInstance].whenShareSucceed;
+	self.whenShareCancelled = [CYServiceShare sharedInstance].whenShareCancelled;
 }
 
 - (void)powerOn
@@ -112,15 +112,16 @@ DEF_SINGLETON( WXChatShared );
 			
 			message.mediaObject = webObject;
 		}
-		
+	
 		message.title = self.post.title && self.post.title.length ? self.post.title : self.post.text;
-		
+		message.description = self.post.text;
+
 		req.message = message;
 		req.bText = NO;
 		req.scene = scene;
-		
+
 		BOOL succeed = [WXApi sendReq:req];
-		
+
 		if ( succeed )
 		{
 			[self notifyShareBegin];
@@ -178,9 +179,9 @@ DEF_SINGLETON( WXChatShared );
 	{
 		self.whenShareBegin();
 	}
-	else if ( [ServiceShare sharedInstance].whenShareBegin )
+	else if ( [CYServiceShare sharedInstance].whenShareBegin )
 	{
-		[ServiceShare sharedInstance].whenShareBegin();
+		[CYServiceShare sharedInstance].whenShareBegin();
 	}
 }
 
@@ -190,9 +191,9 @@ DEF_SINGLETON( WXChatShared );
 	{
 		self.whenShareSucceed();
 	}
-	else if ( [ServiceShare sharedInstance].whenShareSucceed )
+	else if ( [CYServiceShare sharedInstance].whenShareSucceed )
 	{
-		[ServiceShare sharedInstance].whenShareSucceed();
+		[CYServiceShare sharedInstance].whenShareSucceed();
 	}
 
 	[self clearPost];
@@ -205,9 +206,9 @@ DEF_SINGLETON( WXChatShared );
 	{
 		self.whenShareFailed();
 	}
-	else if ( [ServiceShare sharedInstance].whenShareFailed )
+	else if ( [CYServiceShare sharedInstance].whenShareFailed )
 	{
-		[ServiceShare sharedInstance].whenShareFailed();
+		[CYServiceShare sharedInstance].whenShareFailed();
 	}
 	
 	[self clearPost];

@@ -6,10 +6,10 @@
 //  Copyright (c) 2014年 geek-zoo. All rights reserved.
 //
 
-#import "ServiceShare.h"
+#import "CYServiceShare.h"
 #import "WXApi.h"
 
-@interface WXChatShared : ServiceShare <WXApiDelegate>
+@interface CYWXChatShared : CYServiceShare <WXApiDelegate>
 
 AS_SINGLETON( WXChatShared );
 

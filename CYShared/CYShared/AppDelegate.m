@@ -7,9 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "SinaWeibo.h"
-#import "WXChatShared.h"
-#import "TencentOpenShared.h"
+#import "CYSinaWeibo.h"
+#import "CYWXChatShared.h"
+#import "CYTencentOpenShared.h"
 
 @interface AppDelegate ()
 
@@ -27,12 +27,13 @@
 
 - (void)setShared
 {
-	ALIAS( [SinaWeibo sharedInstance], singan );
-	ALIAS( [WXChatShared sharedInstance], wxchat );
-	ALIAS( [TencentOpenShared sharedInstance], tencent );
+	ALIAS( [CYSinaWeibo sharedInstance], singan );
+	ALIAS( [CYWXChatShared sharedInstance], wxchat );
+	ALIAS( [CYTencentOpenShared sharedInstance], tencent );
 
 	// 新浪微博分享
 	singan.appKey = @"2716041576";
+	singan.redirectUrl = @"https://api.weibo.com/oauth2/default.html";
 	[singan powerOn];
 
 	// 微信分享

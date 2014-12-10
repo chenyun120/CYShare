@@ -8,17 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "sharedModel.h"
-#import "Shared_Post.h"
+#import "CYSharedModel.h"
+#import "CYSharedPost.h"
 
 typedef	void	(^ServiceBlock)( void );
 typedef	void	(^ServiceBlockN)( id first, ... );
 
-@interface ServiceShare : NSObject
+@interface CYServiceShare : NSObject
 
 AS_SINGLETON( ServiceShare );
 
-@property (nonatomic, strong) Shared_Post * post;
+@property (nonatomic, strong) CYSharedPost * post;
 
 @property (nonatomic, copy) NSString * appKey;
 @property (nonatomic, copy) NSString * appId;
@@ -28,6 +28,11 @@ AS_SINGLETON( ServiceShare );
 @property (nonatomic, copy) ServiceBlock					whenShareSucceed;
 @property (nonatomic, copy) ServiceBlock					whenShareFailed;
 @property (nonatomic, copy) ServiceBlock					whenShareCancelled;
+
+@property (nonatomic, copy) ServiceBlock					whenFollowBegin;
+@property (nonatomic, copy) ServiceBlock					whenFollowSucceed;
+@property (nonatomic, copy) ServiceBlock					whenFollowFailed;
+@property (nonatomic, copy) ServiceBlock					whenFollowCancelled;
 
 - (void)powerOn;
 

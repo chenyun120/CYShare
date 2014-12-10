@@ -7,9 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "SinaWeibo.h"
-#import "WXChatShared.h"
-#import "TencentOpenShared.h"
+#import "CYSinaWeibo.h"
+#import "CYWXChatShared.h"
+#import "CYTencentOpenShared.h"
 
 @interface ViewController ()
 
@@ -22,11 +22,30 @@
 	[super viewDidLoad];
 }
 
+- (IBAction)followSinAction:(id)sender
+{
+	ALIAS( [CYSinaWeibo sharedInstance], singan );
+
+	singan.whenFollowBegin = ^{
+		// 开始关注
+	};
+
+	singan.whenFollowSucceed = ^{
+		// 关注成功
+	};
+
+	singan.whenFollowFailed = ^{
+		// 关注失败
+	};
+
+	[singan followWithName:@"Vogue服饰与美容"];
+}
+
 // 新浪微博分享
 - (IBAction)sharedSinAction:(id)sender
 {
-	ALIAS( [SinaWeibo sharedInstance], singan );
-	
+	ALIAS( [CYSinaWeibo sharedInstance], singan );
+
 	singan.post = [self tPost];
 
 	singan.whenShareSucceed = ^{
@@ -45,7 +64,7 @@
 // QQ好友分享
 - (IBAction)qqFriendsShared:(id)sender
 {
-	ALIAS( [TencentOpenShared sharedInstance], tencent );
+	ALIAS( [CYTencentOpenShared sharedInstance], tencent );
 
 	tencent.post = [self tPost];
 	
@@ -65,7 +84,7 @@
 // QQ空间分享
 - (IBAction)qqSpaceShared:(id)sender
 {
-	ALIAS( [TencentOpenShared sharedInstance], tencent );
+	ALIAS( [CYTencentOpenShared sharedInstance], tencent );
 
 	tencent.post = [self tPost];
 
@@ -85,7 +104,7 @@
 // 微信好友分享
 - (IBAction)weixinFriendsShared:(id)sender
 {
-	ALIAS( [WXChatShared sharedInstance], wxchat );
+	ALIAS( [CYWXChatShared sharedInstance], wxchat );
 
 	wxchat.post = [self tPost];
 
@@ -93,36 +112,36 @@
 		// 分享成功
 		NSLog(@"分享成功");
 	};
-	
+
 	wxchat.whenShareFailed = ^{
 		// 分享失败
 		NSLog(@"分享失败");
 	};
-	
+
 	[wxchat shareFriend];
 }
 
 // 微信朋友圈分享
 - (IBAction)weixinRingShared:(id)sender
 {
-	[WXChatShared sharedInstance].post = [self tPost];
+	[CYWXChatShared sharedInstance].post = [self tPost];
 
-	[WXChatShared sharedInstance].whenShareSucceed = ^{
+	[CYWXChatShared sharedInstance].whenShareSucceed = ^{
 		// 分享成功
 		NSLog(@"分享成功");
 	};
 
-	[WXChatShared sharedInstance].whenShareFailed = ^{
+	[CYWXChatShared sharedInstance].whenShareFailed = ^{
 		// 分享失败
 		NSLog(@"分享失败");
 	};
 
-	[[WXChatShared sharedInstance] shareTimeline];
+	[[CYWXChatShared sharedInstance] shareTimeline];
 }
 
-- (Shared_Post *)tPost
+- (CYSharedPost *)tPost
 {
-	Shared_Post * post = [[Shared_Post alloc] init];
+	CYSharedPost * post = [[CYSharedPost alloc] init];
 	post.title = @"title";
 	post.text  = @"text";
 	post.photo = [UIImage imageNamed:@"1.png"];
