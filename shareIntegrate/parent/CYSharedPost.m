@@ -6,11 +6,11 @@
 //  Copyright (c) 2014年 geek-zoo. All rights reserved.
 //
 
-#import "Shared_Post.h"
+#import "CYSharedPost.h"
 
-@implementation Shared_Post
+@implementation CYSharedPost
 
-- (void)copyFrom:(Shared_Post *)post
+- (void)copyFrom:(CYSharedPost *)post
 {
 	if ( post.title )
 	{

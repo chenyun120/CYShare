@@ -151,4 +151,55 @@
 	return post;
 }
 
+#pragma mark - Login
+
+- (IBAction)sinLogin:(id)sender
+{
+	ALIAS( [CYSinaWeibo sharedInstance], singan );
+
+	singan.whenGetUserInfoSucceed = ^(id data){
+		NSLog(@"信息获取成功");
+//		ACCOUNT * account = (ACCOUNT *)data;
+	};
+
+	singan.whenGetUserInfoFailed = ^{
+		NSLog(@"信息获取失败");
+	};
+
+	[singan getUserInfo];
+}
+
+- (IBAction)qqLogin:(id)sender
+{
+	ALIAS( [CYTencentOpenShared sharedInstance], tencent );
+
+	tencent.whenGetUserInfoSucceed = ^(id data){
+		NSLog(@"信息获取成功");
+//		ACCOUNT * account = (ACCOUNT *)data;
+	};
+
+	tencent.whenGetUserInfoFailed = ^{
+		NSLog(@"信息获取失败");
+	};
+
+	[tencent getUserInfo];
+}
+
+- (IBAction)weixinLogin:(id)sender
+{
+	ALIAS( [CYWXChatShared sharedInstance], wxchat );
+
+	wxchat.whenGetUserInfoSucceed = ^(id data){
+		NSLog(@"信息获取成功");
+//		ACCOUNT * account = (ACCOUNT *)data;
+	};
+
+	wxchat.whenGetUserInfoFailed = ^{
+		NSLog(@"信息获取失败");
+	};
+
+	[wxchat getuserInfo];
+}
+
+
 @end

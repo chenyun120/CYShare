@@ -36,8 +36,8 @@
 	singan.redirectUrl = @"https://api.weibo.com/oauth2/default.html";
 	[singan powerOn];
 
-	// 微信分享
-	wxchat.appId = @"wx67389d6a38a4bf60";
+	// 微信分享   使用微博和QQ测吧
+	wxchat.appId = @"xxxxxxxxxxxxxxxxxx";
 	[wxchat powerOn];
 
 	// QQ分享

@@ -6,9 +6,6 @@
 //  Copyright (c) 2014年 geek-zoo. All rights reserved.
 //
 
-#define KAppKey @"cf6c9a2d437ec76fa20669293a5c640a"
-#define KAppId @"101027797"
-
 #import "CYTencentOpenShared.h"
 
 @implementation CYTencentOpenShared
@@ -41,7 +38,28 @@ DEF_SINGLETON( TencentOpenShared );
 	NSDictionary * params = notifi.userInfo;
 	[QQApiInterface handleOpenURL:params[@"url"] delegate:(id<QQApiInterfaceDelegate>)self];
 	[TencentOAuth CanHandleOpenURL:params[@"url"]];
+	[TencentOAuth HandleOpenURL:params[@"url"]];
 }
+
+#pragma mark - 得到用户信息
+
+- (void)getUserInfo
+{
+	if ( NO == [TencentOAuth iphoneQQInstalled] )
+	{
+		NSLog(@" 请安装QQ客户端 ");
+		return;
+	}
+
+	NSArray * permissions = @[kOPEN_PERMISSION_GET_INFO,
+							  kOPEN_PERMISSION_GET_USER_INFO,
+							  kOPEN_PERMISSION_GET_SIMPLE_USER_INFO
+							 ];
+
+	[self.tencentOAuth authorize:permissions inSafari:NO];
+}
+
+#pragma mark -
 
 - (void)shareQq
 {
@@ -229,6 +247,52 @@ DEF_SINGLETON( TencentOpenShared );
 	[self.post clear];
 }
 
+#pragma mark - 
+
+- (void)notifyGetUserInfoBegin
+{
+	if ( self.whenGetUserInfoBegin )
+	{
+		self.whenGetUserInfoBegin();
+	}
+	else if ( [CYServiceShare sharedInstance].whenGetUserInfoBegin )
+	{
+		[CYServiceShare sharedInstance].whenGetUserInfoBegin();
+	}
+}
+
+- (void)notifyGetUserInfoSucceed
+{
+	ACCOUNT * account = [[ACCOUNT alloc] init];
+	account.vendor = VENDOR_QQ;
+	account.auth_key = self.appKey;
+	account.auth_token = self.tencentOAuth.accessToken;
+	account.user_id = self.tencentOAuth.openId;
+	NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[self.tencentOAuth.expirationDate timeIntervalSince1970]];
+	account.expires = timeSp;
+
+	if ( self.whenGetUserInfoSucceed )
+	{
+		self.whenGetUserInfoSucceed(account);
+	}
+	else if ( [CYServiceShare sharedInstance].whenGetUserInfoSucceed )
+	{
+		[CYServiceShare sharedInstance].whenGetUserInfoSucceed(account);
+	}
+}
+
+- (void)notifyGetUserInfoFailed
+{
+	if ( self.whenGetUserInfoFailed )
+	{
+		self.whenGetUserInfoFailed();
+	}
+	else if ( [CYServiceShare sharedInstance].whenGetUserInfoFailed )
+	{
+		[CYServiceShare sharedInstance].whenGetUserInfoFailed();
+	}
+}
+
 #pragma mark - WXApiDelegate
 
 - (void)onReq:(QQBaseReq*)req
@@ -238,12 +302,12 @@ DEF_SINGLETON( TencentOpenShared );
 
 - (void)onResp:(QQBaseReq*)resp
 {
-	switch (resp.type)
+	switch ( resp.type )
 	{
 		case ESENDMESSAGETOQQRESPTYPE:
 		{
 			SendMessageToQQResp* sendResp = (SendMessageToQQResp*)resp;
-			
+
 			if ( sendResp.result.integerValue == 0 )
 			{
 				[self notifyShareSucceed];
@@ -258,6 +322,62 @@ DEF_SINGLETON( TencentOpenShared );
 		{
 			break;
 		}
+	}
+}
+
+- (void)isOnlineResponse:(NSDictionary *)response
+{
+	
+}
+
+- (void)tencentDidLogin
+{
+	if ( self.tencentOAuth.accessToken && self.tencentOAuth.accessToken.length )
+	{
+		NSLog(@"accessToken:%@", self.tencentOAuth.accessToken);
+
+		// 获取用户具体信息
+		[self.tencentOAuth getUserInfo];
+	}
+	else
+	{
+		[self  notifyGetUserInfoFailed];
+		NSLog(@"登录失败");
+	}
+}
+
+// 没有网络
+- (void)tencentDidNotNetWork
+{
+	[self  notifyGetUserInfoFailed];
+}
+
+// 登录失败  用户取消
+- (void)tencentDidNotLogin:(BOOL)cancelled
+{
+	if ( cancelled )
+	{
+		NSLog(@"用户取消登录");
+		[self  notifyGetUserInfoFailed];
+	}
+	else
+	{
+		NSLog(@"登录失败");
+		[self  notifyGetUserInfoFailed];
+	}
+}
+
+// 获取用户具体信息的回调
+- (void)getUserInfoResponse:(APIResponse*) response
+{
+	if ( response.detailRetCode == kOpenSDKErrorSuccess )
+	{
+		self.responseDic = response.jsonResponse;
+		[self  notifyGetUserInfoSucceed];
+	}
+	else
+	{
+		[self  notifyGetUserInfoFailed];
 	}
 }
 

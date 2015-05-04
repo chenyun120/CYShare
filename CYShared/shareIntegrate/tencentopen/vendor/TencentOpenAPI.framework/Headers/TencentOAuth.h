@@ -59,7 +59,6 @@
 /** 登陆透传的数据 */
 @property(nonatomic, copy) NSDictionary* passData;
 
-
 /**
  * 返回sdk的版本号
  */
